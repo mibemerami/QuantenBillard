@@ -2,7 +2,9 @@
 A billard-game, but the bolws act like they are quarks.
 
 
+
 Hello Felix,
+
 For starting I thought of five rolls/actors using the application:
 1 Developers; 2 Designers; 3 User/Gamers; 4 Students; 5 Managers.
 And thus five main packages.
