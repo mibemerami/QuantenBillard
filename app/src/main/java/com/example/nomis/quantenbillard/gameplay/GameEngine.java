@@ -10,6 +10,7 @@ import com.example.nomis.quantenbillard.gameplay.helperClasses.billardevents.Bil
 public class GameEngine {
     private Clock clock;
     private BillardTable table;
+    private double intervalStart;
 
     public GameEngine (Clock clock, BillardTable table){
         this.clock = clock;
@@ -18,22 +19,30 @@ public class GameEngine {
 
     public void runGame(){
         boolean abort = false;
-        double intervalStart = System.currentTimeMillis();
+        intervalStart = System.currentTimeMillis();
         while (!abort){
-            if(intervalIsOver(intervalStart)){
-                intervalStart = System.currentTimeMillis();
+            if(intervalIsOver()){
+                startNewInterval();
                 clock.countOneUp();
                 if (table.isBillardEvent(clock.getTime())){
-                    BillardEvent[] billardEvents = table.getBillardEvents(clock.getTime());
-                    for (BillardEvent event : billardEvents) {
-
-                    }
+                    handleEvents();
                 }
             }
         }
     }
 
-    private boolean intervalIsOver(double intervalStart) {
-        return System.currentTimeMillis()-intervalStart >= Clock.TIME_UNIT_SIZE;
-    }
+        private void startNewInterval(){
+            intervalStart = System.currentTimeMillis();
+        }
+
+        private void handleEvents() {
+            BillardEvent[] billardEvents = table.getBillardEvents(clock.getTime());
+            for (BillardEvent event : billardEvents) {
+                event.onEvent();
+            }
+        }
+
+        private boolean intervalIsOver() {
+            return System.currentTimeMillis()-intervalStart >= Clock.TIME_UNIT_SIZE;
+        }
 }

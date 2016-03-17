@@ -5,6 +5,7 @@ import com.example.nomis.quantenbillard.gameplay.BillardObject;
 import com.example.nomis.quantenbillard.gameplay.Queue;
 import com.example.nomis.quantenbillard.gameplay.helperClasses.Position;
 import com.example.nomis.quantenbillard.gameplay.helperClasses.billardevents.BillardEvent;
+import com.example.nomis.quantenbillard.gameplay.helperClasses.billardevents.EventHelper;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class BillardTable extends BillardObject {
     }
 
     public boolean isBillardEvent(int time){
-        return false;
+        return EventHelper.isEvent();
     }
 
     public BillardEvent[] getBillardEvents(int time){
